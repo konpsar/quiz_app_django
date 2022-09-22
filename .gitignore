@@ -1,3 +1,5 @@
 
 venv/*
 quiz_project/quiz_project/.env
+*.pyc
+*.pyc
