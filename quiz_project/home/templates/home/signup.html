@@ -9,13 +9,14 @@
         <nav class="navbar navbar-dark bg-dark">
             <div class="ms-auto">
                 <a href="{% url 'home' %}" class="btn btn-outline-light me-1">Home</a>
-                <a href="{% url 'signup' %}" class="btn btn-outline-light me-1">Sign up</a>
             </div>
         </nav>
 
         <div class="my-5 text-center container">
-            <h1>Welcome to Python Quiz!</h1>
-            <p>Today is {{today}}</p>
+            <form method='POST' style="text-align: left; margin: 0 auto; width: 600px;">{% csrf_token %}
+                {{form.as_p}}
+                <input class="'btn btn-secondary" type="submit" name="Submit"/>
+            </form>        
         </div>
     </body>
 </html>
