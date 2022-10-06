@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="my-5">These are the open ended Questions:</h1>
+
+    <div class="row row-cols3 g-2">
+        {% for Q in openQs %}
+        <div class="col">
+            <div class="p-3 border">
+            <b>{{Q.question}}</b>
+            {{Q.correct_ans|truncatechars:50}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

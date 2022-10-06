@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="my-5">These are the multiple choice Questions:</h1>
+
+    <div class="row row-cols3 g-2">
+        {% for Q in multiQs %}
+        <div class="col">
+            <div class="p-3 border">
+            <b>{{Q.question}}</b>
+            {{Q.correct_ans|truncatechars:10}}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
