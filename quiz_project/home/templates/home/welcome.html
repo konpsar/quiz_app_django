@@ -3,15 +3,24 @@
 
 {% block content %}
         <div class="my-5 text-center container">
-            {% if user.is_authenticated %}
-            <h1>Welcome, {{ user.get_username }}.</h1>
+            {% if user.is_superuser %}
+            <h1>Welcome, {{ user.get_username }} (SU).</h1>
             <p>You are now logged in. <br>Today is {{today}}</p>
             <a href="{% url 'MultiQues-add' %}" class="btn btn-primary">Add a new multiple choice question.</a>
             <a href="{% url 'OpenQues-add' %}" class="btn btn-primary">Add a new open ended question.</a>
-            <a href="{% url 'multiQues.list' %}" class="btn btn-primary">Show all multiple choice Qs.</a>
+            <br><br><a href="{% url 'multiQues.list' %}" class="btn btn-primary">Show all multiple choice Qs.</a>
             <a href="{% url 'openQues.list' %}" class="btn btn-primary">Show all open ended Qs.</a>
+            <br><br><a href="{% url 'admin:index' %}" class="btn btn-primary">Admin page.</a>
+            {% elif user.is_authenticated %}
+            <h1>Welcome, {{ user.get_username }}.</h1>
+            <a href="{% url 'home' %}" class="btn btn-primary">Start Quiz!</a>
             {% else %}
-            <h1>Welcome to Python Quiz!</h1>
+            <h1>Welcome to Python Quiz!</h1>            
+            Please 
+            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+            or 
+            <a href="{% url 'signup' %}" class="btn btn-primary">Sign up</a>
+            to proceed to the Quiz.             
             <p>Today is {{today}}</p>
             
             {% endif %}
