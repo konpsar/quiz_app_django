@@ -6,6 +6,10 @@
             {% if user.is_authenticated %}
             <h1>Welcome, {{ user.get_username }}.</h1>
             <p>You are now logged in. <br>Today is {{today}}</p>
+            <a href="{% url 'MultiQues-add' %}" class="btn btn-primary">Add a new multiple choice question.</a>
+            <a href="{% url 'OpenQues-add' %}" class="btn btn-primary">Add a new open ended question.</a>
+            <a href="{% url 'multiQues.list' %}" class="btn btn-primary">Show all multiple choice Qs.</a>
+            <a href="{% url 'openQues.list' %}" class="btn btn-primary">Show all open ended Qs.</a>
             {% else %}
             <h1>Welcome to Python Quiz!</h1>
             <p>Today is {{today}}</p>
