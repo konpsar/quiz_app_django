@@ -13,7 +13,7 @@
             <br><br><a href="{% url 'admin:index' %}" class="btn btn-primary">Admin page.</a>
             {% elif user.is_authenticated %}
             <h1>Welcome, {{ user.get_username }}.</h1>
-            <a href="{% url 'home' %}" class="btn btn-primary">Start Quiz!</a>
+            <a href="{% url 'quiz' %}" class="btn btn-primary">Start Quiz!</a>
             {% else %}
             <h1>Welcome to Python Quiz!</h1>            
             Please 

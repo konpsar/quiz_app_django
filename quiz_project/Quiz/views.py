@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, TemplateView
 from Quiz.forms import *
 from Quiz.models import *
+from random import sample
 
 # Create your views here.
 class OpenQuesCreateView(CreateView):
@@ -42,3 +43,41 @@ class OpenQuesListView(ListView):
         return OpenQuesModel.objects.all()
     
     
+class QuizView(TemplateView):
+    template_name = 'Quiz/quiz_page.html'
+    # rand_qs = sample(list(MultQuesModel.objects.all()), 10)
+    multi_questions = MultQuesModel.objects.order_by("?").all()[:10]
+
+    def post(self, request, *args, **kwargs):
+        multi_questions = self.multi_questions #random order and take first
+        # multi_questions = self.rand_qs #random order and take first
+        score=0
+        wrong=0
+        correct=0
+        total=0
+        for q in multi_questions:
+            total+=1
+            print(request.POST.get(q.question))
+            print(q.correct_ans)
+            print()  
+            if q.correct_ans ==  request.POST.get(q.question):
+                score+=10
+                correct+=1
+            else:
+                wrong+=1
+        percent = score/(total*10) *100
+        context = {
+            'score':score,
+            'time': request.POST.get('timer'),
+            'correct':correct,
+            'wrong':wrong,
+            'percent':percent,
+            'total':total
+        }      
+        return render(request, 'Quiz/results.html', context)
+
+    def get(self, request, *args, **kwargs):
+        multi_questions = self.multi_questions
+        # multi_questions = self.rand_qs
+        context = {'multi_questions': multi_questions}
+        return render(request, self.template_name, context)
