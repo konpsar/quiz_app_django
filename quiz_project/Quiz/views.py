@@ -46,7 +46,18 @@ class OpenQuesListView(ListView):
 class QuizView(TemplateView):
     template_name = 'Quiz/quiz_page.html'
     # rand_qs = sample(list(MultQuesModel.objects.all()), 10)
-    multi_questions = MultQuesModel.objects.order_by("?").all()[:10]
+    multi_questions = []
+    def dispatch(self, *args, **kwargs):
+        all_multi_ids = MultQuesModel.objects.values_list('id', flat=True)
+        all_multi_ids = list(all_multi_ids)
+        n = 10
+        rand_ids = sample(all_multi_ids, n)
+        print(all_multi_ids, rand_ids)
+        # multi_questions = MultQuesModel.objects.order_by("?").first()
+        self.multi_questions = MultQuesModel.objects.filter(id__in=rand_ids)
+
+        return super().dispatch(*args, **kwargs)
+
 
     def post(self, request, *args, **kwargs):
         multi_questions = self.multi_questions #random order and take first
