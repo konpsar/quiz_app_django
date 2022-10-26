@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<div align="right " id="displaytimer"><b>Timer: 0 seconds</b></div>
+
 <form method='post' action=''>
     {% csrf_token %}
     {% for mq  in multi_questions %}
@@ -10,25 +12,25 @@
     </div>
     <div class="form-check">
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="{{mq.question}}" id="gridRadios1" value="option1" checked>
+            <input class="form-check-input" type="radio" name="{{mq.question}}" id="gridRadios1" value="opt1!">
             <label class="form-check-label" for="gridRadios1">
                 {{mq.opt1}}
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="{{mq.question}}" id="gridRadios2" value="option2">
+            <input class="form-check-input" type="radio" name="{{mq.question}}" id="gridRadios2" value="opt2!">
             <label class="form-check-label" for="gridRadios2">
                 {{mq.opt2}}
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="{{mq.question}}" id="gridRadios1" value="option3">
+            <input class="form-check-input" type="radio" name="{{mq.question}}" id="gridRadios1" value="opt3!">
             <label class="form-check-label" for="gridRadios1">
                 {{mq.opt3}}
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="{{mq.question}}" id="gridRadios2" value="option4">
+            <input class="form-check-input" type="radio" name="{{mq.question}}" id="gridRadios2" value="opt4!">
             <label class="form-check-label" for="gridRadios2">
                 {{mq.opt4}}
             </label>
